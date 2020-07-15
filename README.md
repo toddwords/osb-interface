@@ -5,3 +5,5 @@ To run locally:
 - open the terminal in the osb-interface-master folder
 - enter 'npm install'
 - after installation, enter 'npm start' to run
+
+The main files are 'index.js' and 'network.js' inside the 'src' folder
