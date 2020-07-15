@@ -103,14 +103,16 @@ offsetX = measures[2].x * (bars[0].width/bars[0].height * 500)/bars[0].width - 2
 initOffset = offsetX
 console.log(offsetX)
 // console.log("measures: "+ measureNumb)
-cues.push(new Cue("1", 0.57, "light"))
-cues.push(new Cue("2", 3.3, "light"))
-cues.push(new Cue("3", 12.3, "light"))
+//new Cue(cueName, timePosition, type, data (default=""), duration (default=3))
+//light data format "/lightname dimmer r g b"
+cues.push(new Cue("1", 0.57, "light", "/light1 255 100 200 200"))
+cues.push(new Cue("2", 3.3, "light", "/light2 100 200 250 0"))
+cues.push(new Cue("3", 12.3, "light", "/light1 255 255 255 0"))
 cues.push(new Cue("4", 18.2, "vid"))
 cues.push(new Cue("5", 25, "vid"))
 cues.push(new Cue("6", 31, "l"))
 cues.push(new Cue("7", 31.5, "s"))
-cues.push(new Cue("8", 46.5, "light"))
+cues.push(new Cue("8", 46.5, "light", "/light3 255 255 255 0"))
 cues.push(new Cue("9", 57.9, "light"))
 cues.push(new Cue("10", 69.8, "light"))
 cues.push(new Cue("11", 74.5, "light"))
@@ -235,10 +237,11 @@ if(key == "9")
 offsetX = bars[8].startPos
 }
 class Cue {
-constructor(name, startTime, type, duration=3){
+constructor(name, startTime, type, data="", duration=3){
 this.name = name
 this.startTime = startTime
 this.duration = duration
+this.data = data
 this.type = type;
 this.height = cueHeight;
 this.startY = 500
@@ -276,7 +279,12 @@ stroke(0)
 fill(0)
 text(this.name, this.startPos - offsetX + 10, this.y+10, this.duration * 30 - 20, this.height-20)
 if(this.startPos - offsetX < 10 && !this.hasFired){
-  sendToClient(this.type + " " + this.name)
+  let msg;
+  if(this.data)
+    msg = this.data
+  else
+    msg = this.type + " " + this.name
+  sendToClient(msg)
   this.hasFired = true
 }
 }
