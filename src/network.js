@@ -62,6 +62,7 @@ let data;
 
 client.on('message',function(msg,info){
   var msg = msg.toString()
+  // console.log(msg)
   if(msg.indexOf("position") > -1){
     console.log("msg: " + msg)
   	var ms = msg.trim().split(" ")[1].slice(0,-1)
