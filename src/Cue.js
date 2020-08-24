@@ -89,7 +89,7 @@ class Cue {
       $('#cue-type').val(this.type)
       $('#cue-duration').val(this.duration)
       $('#submit-cue').off('click')
-      $('#submit-cue').click(updateCue)
+      $('#submit-cue').on('click', updateCue)
       $('#delete-cue').show()
       console.log(this.name + " available for edit")
     }

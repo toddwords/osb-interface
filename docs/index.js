@@ -293,15 +293,17 @@ function drawAmpMeter(rms, posMeterX, posMeterY){
 }
 function mouseClicked(){
   console.log(getTimeFromPos(mouseX))
+  var cueFound = false;
   if(mouseY > (topBarHeight + scoreHeight) && mouseY < (topBarHeight+scoreHeight + (cueHeight + cueSpacing)*icons.length) && allowCreateCue){
     for (let i = 0; i < cues.length; i++) {
       if(cues[i].hasMouse()){
         currentCueIndex = i;
         cues[i].edit()
-        return
+        cueFound = true
       } 
     }
-    createCue(getTimeFromPos(mouseX))
+    if(!cueFound)
+      createCue(getTimeFromPos(mouseX))
   }
 }
 function clearCues(){
@@ -327,14 +329,19 @@ function createCue(time){
   $('#cue-measure').val(getMeasureFromTime(time)['num'])
   $('#cue-time').val(time)
   $('#submit-cue').off('click')
-  $('#submit-cue').click(addCue)
+  $('#submit-cue').on('click', addCue)
 }
-
+function clearForm(){
+  $('#cue-name').val('')
+  $('#cue-data').val('')
+  $('#cue-duration').val('0.5')
+}
 
 function addCue(){
   cues.push(new Cue($('#cue-name').val(), parseFloat($('#cue-time').val()), $('#cue-type').val(), $('#cue-data').val(), parseFloat($('#cue-duration').val())))
   // store.set('cueList', cues)
-  $('#add-cue-popup').fadeOut(function(){allowCreateCue = true;})
+
+  $('#add-cue-popup').fadeOut(function(){allowCreateCue = true; clearForm()})
   draw()
 }
 function updateCue(){
@@ -346,7 +353,7 @@ function updateCue(){
     duration: parseFloat($('#cue-duration').val())
   })
   // store.set('cueList', cues)
-  $('#add-cue-popup').fadeOut(function(){allowCreateCue = true;})
+  $('#add-cue-popup').fadeOut(function(){allowCreateCue = true; clearForm()})
   draw()
 }
 function deleteCue(){
@@ -356,7 +363,7 @@ function deleteCue(){
   draw()
 }
 function cancelCue(){
-  $('#add-cue-popup').fadeOut(function(){allowCreateCue = true;})
+  $('#add-cue-popup').fadeOut(function(){allowCreateCue = true;clearForm()})
 }
 function createCueFromObject(obj){
   cues.push(new Cue(obj['name'], obj['startTime'], obj['type'], obj['data'], obj['duration']))
