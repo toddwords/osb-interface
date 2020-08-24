@@ -1,4 +1,4 @@
-# OpenShowBible Interface
+# OpenShow
 To run locally:
 - checkout the repo or download and unzip the zip file
 - install [node](https://nodejs.org/en/download/) if you don't have it
