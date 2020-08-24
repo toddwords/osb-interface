@@ -67,11 +67,11 @@ client.on('message',function(msg,info){
     console.log("msg: " + msg)
   	var ms = msg.trim().split(" ")[1].slice(0,-1)
     if(updateFromPackets)
-  	   updateTime(parseFloat(ms)/1000)
+  	   updateTimeFromPacket(parseFloat(ms)/1000)
   }
   if(msg.indexOf("env") > -1){
     // console.log(msg)
-    amplitude = parseFloat(msg.trim().split(" ")[1].slice(0,-1))/300
+    amplitude = parseFloat(msg.trim().split(" ")[1].slice(0,-1))/100
     console.log(amplitude)
   }
 });

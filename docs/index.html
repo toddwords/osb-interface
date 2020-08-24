@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Open Show</title>
+<style>
+  @font-face {
+    font-family: Oswald;
+    src: url('fonts/Oswald-Medium.ttf')
+  }
+	body{
+		overflow:hidden;
+    margin:0;
+    padding:0;
+    font-family: Oswald;
+	}
+  #add-cue-popup {
+    position:fixed;
+    display: none;
+    width:200px;
+    background-color: #ccc;
+    height:400px;
+    border-radius: 30px;
+    border: 5px solid rgba(0,166,255,0.3);
+    padding:10px;
+  }
+  #measure-number {
+    color: #ddd;
+    position:fixed;
+    top:17px;
+    left: 39%;
+  }
+  input {
+    background-color:#ddd;
+    color:rgb(51,51,51,);
+    padding-left: 5px;
+    font-family: Oswald;
+    margin-left: 2px;
+  }
+  select {
+    background-color:#ddd;
+    color:rgb(51,51,51,);
+  }
+
+  #delete-cue {
+    display:none;
+  }
+  #current-measure {
+    width:30px;
+  }
+
+  button {
+    font-family: Oswald
+  }
+
+  
+  #score-following-label {
+    position:fixed;
+    left:61%;
+    top:20px;
+    color: #ddd;
+  }
+  .switch {
+  position: fixed;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  left:57%;
+  top:28px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
+  </head>
+  <body>
+    <div id='measure-number'>
+      <p>Current Measure: <input id='current-measure' onkeydown="onEnter(event)" ></p>
+    </div>
+    <label class="switch">
+      <input type="checkbox" checked>
+      <span class="slider round"></span>
+      
+    </label>
+    <p id='score-following-label'>Score Following</p>
+    <div id='add-cue-popup'>
+      <p>Cue Name: <input id='cue-name'></p>
+      <p>Type: <select id='cue-type'>
+        <option>light</option>
+        <option>video</option>
+        <option>sound</option>
+      </select></p>
+      <p>Measure: <input id='cue-measure'></p>
+      <p>Time: <input id='cue-time'></p>
+      <p>Data: <input id='cue-data'></p>
+      <p>Duration: <input id='cue-duration' value="0.5"></p>
+      <button id="submit-cue" onclick="addCue()">Submit</button>
+      <button id="delete-cue" onclick="deleteCue()"></button>
+      <button id="cancel-cue" onclick="cancelCue()">Cancel</button>
+    </div>
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="jquery-3.3.1.js"></script>
+    <script src="p5.js"></script>
+   <script>if (window.module) module = window.module;</script>
+    <script src="Cue.js"></script>
+  	<script type="text/javascript" src="index.js"></script>
+    
+  </body>
+</html>
