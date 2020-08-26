@@ -109,9 +109,7 @@ function setup() {
 createCanvas(windowWidth, windowHeight);
 textFont(oswald);
 // cnv.parent('canvas-holder')
-let playPause = createButton('Play/Pause')
-playPause.position(width/2, topBarHeight/3)
-playPause.mousePressed(togglePause)
+
 console.log(measures.length)
 bars[0].measures = 3;  
 bars[1].measures = 3;  

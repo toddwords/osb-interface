@@ -24,11 +24,23 @@
     border: 5px solid rgba(0,166,255,0.3);
     padding:10px;
   }
+  #top-controls {
+    width: 100%;
+    display:flex;
+    margin:auto;
+    position:fixed;
+    top:25px;
+    align-items: center;
+  justify-content: center;
+  }
+  #top-controls div {
+    margin: 0px 25px;
+  }
   #measure-number {
     color: #ddd;
-    position:fixed;
-    top:17px;
-    left: 39%;
+  }
+  #playPause {
+    font-size:18px;
   }
   input {
     background-color:#ddd;
@@ -46,7 +58,9 @@
     display:none;
   }
   #current-measure {
+    margin-left:5px;
     width:30px;
+    height:26px;
   }
 
   button {
@@ -55,18 +69,19 @@
 
   
   #score-following-label {
-    position:fixed;
-    left:61%;
-    top:20px;
+   /* position:fixed;  */
+    display:inline-block;
     color: #ddd;
+    margin-left: 70px;
+    margin-top: 5px;
   }
   .switch {
   position: fixed;
   display: inline-block;
   width: 60px;
   height: 34px;
-  left:57%;
-  top:28px;
+  /* left:57%;
+  top:28px; */
 }
 
 .switch input { 
@@ -121,18 +136,26 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
 </style>
   </head>
   <body>
+    <div id="top-controls">
     <div id='measure-number'>
       <p>Current Measure: <input id='current-measure' onkeydown="onEnter(event)" ></p>
     </div>
+    <div>
+      <button id="playPause" onclick="togglePause()">&#9658; &#10074;&#10074;</button>
+    </div>
+    <div style="margin-top: -6px;">
     <label class="switch">
       <input type="checkbox" checked>
       <span class="slider round"></span>
-      
     </label>
-    <p id='score-following-label'>Score Following</p>
+    <span id='score-following-label'>Score Following</span>
+  </div>
+  </div>
+
     <div id='add-cue-popup'>
       <p>Cue Name: <input id='cue-name'></p>
       <p>Type: <select id='cue-type'>
